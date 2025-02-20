@@ -18,7 +18,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepositoriy userRepositoriy;
     private final EncoderConfig encoderConfig;
