@@ -25,5 +25,6 @@ public class UserController {
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         return "userPage";
+
     }
 }

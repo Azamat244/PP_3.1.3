@@ -8,4 +8,5 @@ import ru.khafizov.pp_3_1_2.models.Role;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
     Role findByName(String roleName);
+
 }

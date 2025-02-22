@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 @Table(name = "user")
 public class User implements UserDetails {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

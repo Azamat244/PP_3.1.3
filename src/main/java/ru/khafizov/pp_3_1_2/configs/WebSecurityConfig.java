@@ -49,6 +49,7 @@ public class WebSecurityConfig {
                         .permitAll()
                 )
                 .build();
+
     }
 
 

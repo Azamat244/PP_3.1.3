@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("User " + email + " not found");
         }
         return user;
+
     }
 
     @Override
