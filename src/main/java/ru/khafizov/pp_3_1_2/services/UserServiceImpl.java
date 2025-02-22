@@ -4,12 +4,10 @@ package ru.khafizov.pp_3_1_2.services;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.khafizov.pp_3_1_2.configs.EncoderConfig;
 import ru.khafizov.pp_3_1_2.models.User;
 import ru.khafizov.pp_3_1_2.repositories.UserRepositoriy;
 
@@ -21,12 +19,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepositoriy userRepositoriy;
-    private final EncoderConfig encoderConfig;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepositoriy userRepositoriy, EncoderConfig encoderConfig) {
+    public UserServiceImpl(UserRepositoriy userRepositoriy, PasswordEncoder passwordEncoder) {
         this.userRepositoriy = userRepositoriy;
-        this.encoderConfig = encoderConfig;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -46,7 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByEmail(String email){
+    public User findByEmail(String email) {
         return userRepositoriy.findByEmail(email);
     }
 
@@ -56,7 +54,7 @@ public class UserServiceImpl implements UserService {
         if (findByEmail(user.getEmail()) != null) {
             throw new RuntimeException("Пользователь с таким именем уже существует");
         }
-        user.setPassword(encoderConfig.passwordEncoder().encode((user.getPassword())));
+        user.setPassword(passwordEncoder.encode((user.getPassword())));
         userRepositoriy.save(user);
     }
 
@@ -67,14 +65,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Integer id) {
-        return userRepositoriy.findById(id).orElseThrow(() ->
-                new EntityNotFoundException("Пользователь с ID " + id + " не найден"));
+        return userRepositoriy.findById(id).orElseThrow(() -> new EntityNotFoundException("Пользователь с ID " + id + " не найден"));
     }
 
     @Override
     public void updateUser(User updateUser) {
-        User existUser = userRepositoriy.findById(updateUser.getId()).orElseThrow(() ->
-                new EntityNotFoundException("Пользователь с ID = " + updateUser.getId() + "не найден"));
+        User existUser = userRepositoriy.findById(updateUser.getId()).orElseThrow(() -> new EntityNotFoundException("Пользователь с ID = " + updateUser.getId() + "не найден"));
 
         existUser.setUsername(updateUser.getUsername());
         existUser.setLastname(updateUser.getLastname());

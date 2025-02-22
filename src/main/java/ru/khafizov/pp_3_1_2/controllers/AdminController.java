@@ -1,15 +1,12 @@
 package ru.khafizov.pp_3_1_2.controllers;
 
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.khafizov.pp_3_1_2.models.Role;
 import ru.khafizov.pp_3_1_2.models.User;
 import ru.khafizov.pp_3_1_2.services.RoleService;
 import ru.khafizov.pp_3_1_2.services.UserService;

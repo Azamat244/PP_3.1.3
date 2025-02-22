@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import ru.khafizov.pp_3_1_2.services.UserServiceImpl;
 
@@ -31,9 +32,10 @@ public class WebSecurityConfig {
                         .requestMatchers("/user/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                         .requestMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
                         .requestMatchers("/").permitAll()
-
+                        .requestMatchers("/error").permitAll()
 
                 )
+                .csrf((csrf) -> csrf.disable())
                 .formLogin(form -> form //логика перенаправления после успешной аутентификации
                         .loginPage("/login")
                         .loginProcessingUrl("/auth")
