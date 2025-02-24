@@ -40,13 +40,13 @@ public class AdminController {
 
 
     @PostMapping("/save")
-    public String saveUser(@ModelAttribute("user") User user, Model model) {
+    public String saveUser(@ModelAttribute("user") User user) {
         userService.save(user);
         return "redirect:/admin";
     }
 
     @PostMapping("/edit")
-    public String editUser(@ModelAttribute("user") User user, Model model) {
+    public String editUser(@ModelAttribute("user") User user) {
         userService.validateUser(user);
         userService.updateUser(user);
         return "redirect:/admin";
