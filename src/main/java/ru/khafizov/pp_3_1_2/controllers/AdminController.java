@@ -29,6 +29,7 @@ public class AdminController {
 
     @GetMapping  //админ-панель где выводятся все юзеры
     public String admin(Model model, Principal principal) {
+
         List<User> users = userService.findAll();
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("users", users);
